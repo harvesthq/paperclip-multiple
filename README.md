@@ -1,5 +1,7 @@
 # paperclip-multiple
 
+[![Build Status](https://travis-ci.org/harvesthq/paperclip-multiple.png?branch=master)](https://travis-ci.org/harvesthq/paperclip-multiple)
+
 paperclip-multiple is a storage implementation for [Paperclip](https://github.com/thoughtbot/paperclip).
 It aims to help migrating files from `filesystem` storage to [`fog`](http://fog.io) storage.
 
