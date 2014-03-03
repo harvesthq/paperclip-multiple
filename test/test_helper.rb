@@ -15,6 +15,7 @@ ActiveRecord::Schema.suppress_messages do
   ActiveRecord::Schema.define version: 0 do
     create_table :users, force: true do |t|
       t.string  :avatar_file_name
+      t.string  :avatar_content_type
     end
   end
 end
@@ -59,5 +60,6 @@ class User < ActiveRecord::Base
     multiple_if:     lambda { |user| User.s3_enabled      },
     display_from_s3: lambda { |user| User.display_from_s3 }
   }
-end
 
+  validates_attachment_content_type :avatar, :content_type => /\Aimage/
+end

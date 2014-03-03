@@ -3,3 +3,7 @@ rvm:
   - 2.1.1
   - 2.0.0
   - 1.9.3
+
+gemfile:
+  - gemfiles/paperclip_3.gemfile
+  - gemfiles/paperclip_4.gemfile

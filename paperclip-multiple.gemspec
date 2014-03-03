@@ -17,10 +17,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "paperclip", "~> 3.5.0"
+  spec.add_dependency "paperclip"
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "activerecord"
   spec.add_development_dependency "fog"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "appraisal"
 end
