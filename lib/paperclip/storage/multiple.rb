@@ -36,7 +36,7 @@ module Paperclip
       ##
       # This defaults to the filesystem version, since it's a lot faster than querying s3.
       def exists?(style_name = default_style)
-        filesystem.exists?
+        filesystem.exists?(style_name)
       end
 
       ##
