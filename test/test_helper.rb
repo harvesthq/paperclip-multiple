@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, {
     storage: :multiple,
+    multiple_storages: [:filesystem, :fog],
 
     fog_credentials: FOG_CREDENTIALS,
     fog_public:    true,
@@ -57,8 +58,8 @@ class User < ActiveRecord::Base
     path: ":compatible_path/:class/:attachment/:id_partition/:style/:filename",
     url:  "/uploads/:class/:attachment/:id_partition/:style/:filename",
 
-    multiple_if:     lambda { |user| User.s3_enabled      },
-    display_from_s3: lambda { |user| User.display_from_s3 }
+    multiple_if:              ->(_) { User.s3_enabled },
+    display_from_destination: ->(_) { User.display_from_s3 }
   }
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage/

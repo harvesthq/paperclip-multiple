@@ -2,6 +2,6 @@
 
 source "https://rubygems.org"
 
-gem "paperclip", "~> 3.5.0"
+gem "paperclip", "~> 6.0"
 
-gemspec :path=>"../"
+gemspec path: "../"

@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Paperclip::Multiple::VERSION
   spec.authors       = ["Albert Llop"]
   spec.email         = ["mrsimo@gmail.com"]
-  spec.summary       = "Storage backend for Paperclip to help migrate from the filesystem to S3 with fog."
+  spec.summary       = "Storage backend for Paperclip to help migrate from one storage to another."
   spec.homepage      = "https://github.com/harvesthq/paperclip-multiple"
   spec.license       = "MIT"
 

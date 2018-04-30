@@ -15,24 +15,24 @@ class PaperclipMultipleTest < ActiveSupport::TestCase
   test "behaves as a normal filesystem attachment" do
     @user = build_user
 
-    assert File.exists?(@user.avatar.path)
-    assert File.exists?(@user.avatar.path(:thumbnail))
+    assert File.exist?(@user.avatar.path)
+    assert File.exist?(@user.avatar.path(:thumbnail))
 
     assert_equal 0, fog_directory.files.size
-    assert_nil @user.avatar.filesystem
-    assert_nil @user.avatar.fog
+    assert_nil @user.avatar.origin
+    assert_nil @user.avatar.destination
   end
 
   test "stores a file both locally and remotely" do
     User.s3_enabled = true
     @user = build_user
 
-    assert File.exists?(@user.avatar.filesystem.path)
-    assert File.exists?(@user.avatar.filesystem.path(:thumbnail))
+    assert File.exist?(@user.avatar.origin.path)
+    assert File.exist?(@user.avatar.origin.path(:thumbnail))
 
     assert_equal 2, fog_directory.files.size
-    assert fog_directory.files.head(@user.avatar.fog.path).present?
-    assert fog_directory.files.head(@user.avatar.fog.path(:thumbnail)).present?
+    assert fog_directory.files.head(@user.avatar.destination.path).present?
+    assert fog_directory.files.head(@user.avatar.destination.path(:thumbnail)).present?
   end
 
   test "deleting deletes both" do
@@ -40,21 +40,21 @@ class PaperclipMultipleTest < ActiveSupport::TestCase
     @user = build_user
 
     local_paths = [
-      @user.avatar.filesystem.path,
-      @user.avatar.filesystem.path(:thumbnail)
+      @user.avatar.origin.path,
+      @user.avatar.origin.path(:thumbnail)
     ]
 
     s3_paths = [
-      @user.avatar.fog.path,
-      @user.avatar.fog.path(:thumbnail)
+      @user.avatar.destination.path,
+      @user.avatar.destination.path(:thumbnail)
     ]
 
     assert_difference "fog_directory.files.all.size", -2 do
       @user.destroy
     end
 
-    assert !File.exists?(local_paths.first)
-    assert !File.exists?(local_paths.last)
+    assert !File.exist?(local_paths.first)
+    assert !File.exist?(local_paths.last)
 
     assert fog_directory.files.head(s3_paths.first).blank?
     assert fog_directory.files.head(s3_paths.last).blank?
